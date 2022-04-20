@@ -1,3 +1,28 @@
 .main-background {
     background-color: #212121;
 }
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.exercise-title-container {
+    width: 850px;
+    background-color: #e5e5e5;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+    /* border-radius: 24; */
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00d742;
+    border-radius: 5px;
+    box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgb(174 174 192 / 40%);
+}
+
+.exercise-title-text {}

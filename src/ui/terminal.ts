@@ -2,13 +2,7 @@ let userInput, terminalOutput;
 let projAsk = false;
 let lastCommands = [];
 
-console.log("Welcome to my website!");
-
 const COMMANDS = {
-    rd: "Whoa!!! You found the secret command!!! To get access to the beta for my apps, go <a href = 'https://blackholegames.gq/beta' target = '_blank' style = 'color:#000;'> here </a> <br>The beta code is A3T4M",
-    n: "OK",
-    no: "OK",
-    about: "This bit is coming soon. In the meantime, Feel free to visit my <a href ='https://github.com/Blackhole11232' target='_blank' style='color:#000;'> Github",
     ls: "usr&nbsp;&nbsp;&nbsp;&nbsp;home&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;&nbsp;&nbsp;&nbsp;root",
     cd: "changed directory to root..",
     "cd ..": "cd: no such file or directory",
@@ -17,9 +11,7 @@ const COMMANDS = {
     "cd usr": "no users found",
 
     "cd home": "home was aliased to .",
-    sudo: "user not in the sudoers file.  This incident will be reported.",
-    help: 'Supported commands: <span class="code">about</span>, <span class="code">contact</span>, <span class="code">projects</span>, <span class="code">github</span><br>System commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">cd</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
-    contact: "Email (coming soon): <a class='link' href=''>Gmail</a><br>Form: <a href='/contact' class='link'> Anon Message</a><br>",
+    help: 'Supported commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">cd</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
     "git add .": "Funcionou",
 };
 
@@ -28,9 +20,10 @@ const app = () => {
     terminalOutput = document.getElementById("terminalOutput");
     document.getElementById("dummyKeyboard").focus();
     console.log("Application loaded");
+    tutor.showExerciseTitle();
 };
 
-const execute = function executeCommand(input) {
+const execute = function executeCommand(input: string) {
     input = input.toLowerCase();
     lastCommands.push(input);
     let output;
@@ -41,20 +34,20 @@ const execute = function executeCommand(input) {
         input = "sudo";
     }
 
-    if (input == "projects") {
-        open("pages/projects.html");
-    } else if (input === "clear" || input === "cls") {
+    if (input === "clear" || input === "cls") {
         clearScreen();
     } else if (input === "history") {
         showHist();
-    } else if (input === "github") {
-        open("https://github.com/terminal-js");
     } else {
         output = `<div class="terminal-line"><span class="success">➜</span> <span class="directory">~</span> ${input}</div>`;
-        if (!COMMANDS.hasOwnProperty(input)) {
+        if (!COMMANDS.hasOwnProperty(input) && !input.startsWith("git")) {
             output += `<div class="terminal-line">command not found: ${input}</div>`;
+        } else if (input.startsWith("git")) {
+            tutor.answerExercise(input);
+            output += `<div class="terminal-line">${tutor.currentExercise.answerResponse}</div>`;
         } else {
             output += COMMANDS[input];
+
         }
 
         terminalOutput.innerHTML = `${terminalOutput.innerHTML}<br><div class="terminal-line">${output}<br></div>`;
