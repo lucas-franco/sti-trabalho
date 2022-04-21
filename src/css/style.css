@@ -78,3 +78,31 @@ body {
 .margin-right-2 {
     margin-right: 2px;
 }
+
+.session-finished-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.session-finished-text {
+    font-size: 1.0em !important;
+}
+
+.retry-button {
+    margin-top: 60px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+    background-color: #00d742;
+    border: 0px;
+    cursor: pointer;
+}
+
+.retry-button-label {
+    color: #ffffff !important;
+}

@@ -26,13 +26,12 @@ const EXERCISES_ANSWERS = [
 ]
 
 class Exercise {
-    index: number;
+    index: number; // difficulty: 1 to 5
     title: string;
     totalSteps: number;
     currentStep: number;
 
     answer?: string;
-    answerIsCorrect?: boolean;
     answerStepAttempts: number;
 
     constructor(index: number, title: string, totalSteps: number) {
@@ -47,7 +46,6 @@ class Exercise {
     addAnswer(answer: string): void {
         this.answer = answer;
         
-        this.answerIsCorrect = false;
         this.answerStepAttempts += 1;
     }
 }
@@ -65,10 +63,12 @@ class AnswerResponse {
 class Expert {
     exercises: Exercise[];
     totalExercises: number;
+    totalHints: number;
 
     constructor() {
         this.exercises = this.createExercises();
         this.totalExercises = this.exercises.length;
+        this.totalHints = EXERCISES_ANSWERS.reduce((partialSum, it) => partialSum + it.hints.length, 0);
     }
 
 
@@ -84,16 +84,16 @@ class Expert {
         if (isCorrect) {
             exercise.currentStep += 1;
         }
-        console.log("answerExercise", { answerResponse, exerciseAnswer });
+        
         return answerResponse;
     }
     
     createExercises = (): Exercise[] => [
         new Exercise(1, "Envie as mudanças para o repositório remoto (origin) na branch master.", 3),
         new Exercise(2, "Crie uma nova branch e adicione ela no repositório remoto", 2),
-        new Exercise(2, "Crie uma nova branch e adicione ela no repositório remoto", 2),
-        new Exercise(2, "Crie uma nova branch e adicione ela no repositório remoto", 2),
-        new Exercise(2, "Crie uma nova branch e adicione ela no repositório remoto", 2),
+        new Exercise(3, "Exercício nível 3", 2),
+        new Exercise(4, "Exercício nível 4", 2),
+        new Exercise(5, "Exercício nível 5", 2),
     ]
 
     getExercise(index: number): Exercise {

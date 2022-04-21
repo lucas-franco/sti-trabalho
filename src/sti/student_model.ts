@@ -1,22 +1,55 @@
 class User {
-    correctExercises: number;
-    finishedExercises: number;
-    hintsNeeded: number;
+    finishedExercises: Exercise[];
+    
+    allHintsNeeded: number;
+    currentExerciseHintsNeeded: number;
 
+    currentStepAttempts: number; // Attempts == wrong answers
+    currentExerciseAttempts: number;
+    allAttempts: number;
+    
     constructor() {
-        this.correctExercises = 0;
-        this.finishedExercises = 0;
-        this.hintsNeeded = 0;
+        this.finishedExercises = [];
+        this.allHintsNeeded = 0;
+        this.currentExerciseHintsNeeded = 0;
+        this.currentStepAttempts = 0
+        this.currentExerciseAttempts = 0;
+        this.allAttempts = 0;
     }
     
-    addCorrectExercises() {
-        this.correctExercises +=1;
+    addFinishedExercises(exercise: Exercise) {
+        this.finishedExercises.push(exercise);
+
+        this.currentStepAttempts = 0;
+        this.currentExerciseAttempts = 0;
     }
-    addFinishedExercises() {
-        this.finishedExercises +=1;
+
+    resetHintsNeeded() {
+        this.currentExerciseHintsNeeded = 0
     }
+
     addHintsNeeded() {
-        this.hintsNeeded +=1;
+        if (this.currentStepAttempts == 2) {
+            this.currentExerciseHintsNeeded +=1;
+            this.addAllHintsNeeded();
+        }
+    }
+    addAllHintsNeeded() {
+        this.allHintsNeeded += 1;
+    }
+    resetCurrentStepAttempts() {
+        this.currentStepAttempts = 0;
+    }
+    addCurrentStepAttempts() {
+        this.currentStepAttempts +=1;
+        this.addCurrentExerciseAttempts();
+    }
+    addCurrentExerciseAttempts() {
+        this.currentExerciseAttempts +=1;
+        this.addAttempts();
+    }
+    addAttempts() {
+        this.allAttempts +=1;
     }
 }
 

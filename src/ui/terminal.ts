@@ -11,16 +11,16 @@ const COMMANDS = {
     // "cd usr": "no users found",
 
     // "cd home": "home was aliased to .",
-    help: 'Supported commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">cd</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
+    help: 'Supported commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
 };
 
 const app = () => {
     userInput = document.getElementById("userInput");
     terminalOutput = document.getElementById("terminalOutput");
     document.getElementById("dummyKeyboard").focus();
-    console.log("Application loaded");
     tutor.showExerciseTitle();
     tutor.showProgressBar();
+    console.log("Application loaded");
 };
 
 const execute = function executeCommand(input: string) {
@@ -44,7 +44,6 @@ const execute = function executeCommand(input: string) {
             output += answerResponse;
         } else {
             output += COMMANDS[input];
-
         }
 
         terminalOutput.innerHTML = `${terminalOutput.innerHTML}<br><div class="terminal-line">${output}<br></div>`;
@@ -53,8 +52,9 @@ const execute = function executeCommand(input: string) {
 };
 
 const key = (e) => {
-    const input = userInput.innerHTML;
+    // console.log("key", {e});
 
+    const input = userInput.innerHTML;
     if (e.key === "Enter") {
         execute(input);
         userInput.innerHTML = "";
@@ -65,6 +65,8 @@ const key = (e) => {
 };
 
 const backspace = (e) => {
+    // console.log("backspace", {e});
+
     if (e.keyCode !== 8 && e.keyCode !== 46) {
         return;
     }
@@ -82,6 +84,11 @@ function showHist() {
 
 let iter = 0;
 const up = (e) => {
+    // console.log("up", {e});
+    if (e.key === "Escape") {
+        tutor.finishSession();
+    }
+
     if (e.key === "ArrowUp") {
         if (lastCommands.length > 0 && iter < lastCommands.length) {
             iter += 1;
