@@ -3,16 +3,15 @@ let projAsk = false;
 let lastCommands = [];
 
 const COMMANDS = {
-    ls: "usr&nbsp;&nbsp;&nbsp;&nbsp;home&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;&nbsp;&nbsp;&nbsp;root",
-    cd: "changed directory to root..",
-    "cd ..": "cd: no such file or directory",
-    "cd var": "var aliased to ../",
-    "cd root": "access denied",
-    "cd usr": "no users found",
+    ls: "programa.c&nbsp;&nbsp;&nbsp;&nbsp;programa.h&nbsp;&nbsp;&nbsp;&nbsp;programa.o&nbsp;&nbsp;&nbsp;&nbsp;makefile",
+    // cd: "changed directory to root..",
+    // "cd ..": "cd: no such file or directory",
+    // "cd var": "var aliased to ../",
+    // "cd root": "access denied",
+    // "cd usr": "no users found",
 
-    "cd home": "home was aliased to .",
+    // "cd home": "home was aliased to .",
     help: 'Supported commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">cd</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
-    "git add .": "Funcionou",
 };
 
 const app = () => {
@@ -21,6 +20,7 @@ const app = () => {
     document.getElementById("dummyKeyboard").focus();
     console.log("Application loaded");
     tutor.showExerciseTitle();
+    tutor.showProgressBar();
 };
 
 const execute = function executeCommand(input: string) {
@@ -29,9 +29,6 @@ const execute = function executeCommand(input: string) {
     let output;
     if (input.length === 0) {
         return;
-    }
-    if (input.indexOf("sudo") >= 0) {
-        input = "sudo";
     }
 
     if (input === "clear" || input === "cls") {
@@ -43,8 +40,8 @@ const execute = function executeCommand(input: string) {
         if (!COMMANDS.hasOwnProperty(input) && !input.startsWith("git")) {
             output += `<div class="terminal-line">command not found: ${input}</div>`;
         } else if (input.startsWith("git")) {
-            tutor.answerExercise(input);
-            output += `<div class="terminal-line">${tutor.currentExercise.answerResponse}</div>`;
+            var answerResponse: string = tutor.answerExercise(input);
+            output += answerResponse;
         } else {
             output += COMMANDS[input];
 
