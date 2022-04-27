@@ -115,7 +115,7 @@ class Expert {
 
     answerExercise(exercise: Exercise): AnswerResponse {
         var exerciseAnswer = EXERCISES_ANSWERS.find((it) => it.exerciseIndex == exercise.index);
-        var stepAnswer: string = exerciseAnswer.steps[exercise.currentStep];
+        var stepAnswer: string = "(" + exerciseAnswer.steps[exercise.currentStep] + ")$";
         var match = exercise.answer.match(stepAnswer);
         
         var isCorrect: boolean = match != null && match.length > 0;

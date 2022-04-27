@@ -13,10 +13,10 @@ const COMMANDS = {
     // "cd home": "home was aliased to .",
     help: 'Comandos disponíveis: <span class="code">git help</span>, <span class="code">clear</span>, <span class="code">history</span>, <span class="code">ls</span><br>Dica: Use a Seta para Cima/Baixo para percorrer comandos recentes.',
     "git help": `
-        start a working area (see also: git help tutorial)<br>
+        start a working area<br>
         <span class="code">init</span>&nbsp;Create an empty Git repository or reinitialize an existing one<br><br>
 
-        work on the current change (see also: git help everyday)<br>
+        work on the current change<br>
         <span class="code">add</span>&nbsp;Add file contents to the index<br><br>
 
         grow, mark and tweak your common history<br>
@@ -25,7 +25,7 @@ const COMMANDS = {
         <span class="code">commit</span>&nbsp;Record changes to the repository<br>
         <span class="code">merge</span>&nbsp;Join two or more development histories together<br><br>
 
-        collaborate (see also: git help workflows)<br>
+        collaborate<br>
         <span class="code">remote</span>&nbsp;Manage set of tracked repositories<br>
         <span class="code">fetch</span>&nbsp;Download objects and refs from another repository<br>
         <span class="code">pull</span>&nbsp;Fetch from and integrate with another repository or a local branch<br>
@@ -44,6 +44,7 @@ const app = () => {
     document.getElementById("dummyKeyboard").focus();
     tutor.showExerciseTitle();
     tutor.showProgressBar();
+    tutor.showStep();
     console.log("Application loaded");
 };
 

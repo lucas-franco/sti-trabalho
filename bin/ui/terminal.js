@@ -40,7 +40,7 @@ var lastCommands = [];
 var COMMANDS = {
     ls: "programa.c&nbsp;&nbsp;&nbsp;&nbsp;programa.h&nbsp;&nbsp;&nbsp;&nbsp;programa.o&nbsp;&nbsp;&nbsp;&nbsp;makefile",
     help: 'Comandos disponíveis: <span class="code">git help</span>, <span class="code">clear</span>, <span class="code">history</span>, <span class="code">ls</span><br>Dica: Use a Seta para Cima/Baixo para percorrer comandos recentes.',
-    "git help": "\n        start a working area (see also: git help tutorial)<br>\n        <span class=\"code\">init</span>&nbsp;Create an empty Git repository or reinitialize an existing one<br><br>\n\n        work on the current change (see also: git help everyday)<br>\n        <span class=\"code\">add</span>&nbsp;Add file contents to the index<br><br>\n\n        grow, mark and tweak your common history<br>\n        <span class=\"code\">checkout</span>&nbsp;Switch branches or restore working tree files<br>\n        <span class=\"code\">branch</span>&nbsp;List, create, or delete branches<br>\n        <span class=\"code\">commit</span>&nbsp;Record changes to the repository<br>\n        <span class=\"code\">merge</span>&nbsp;Join two or more development histories together<br><br>\n\n        collaborate (see also: git help workflows)<br>\n        <span class=\"code\">remote</span>&nbsp;Manage set of tracked repositories<br>\n        <span class=\"code\">fetch</span>&nbsp;Download objects and refs from another repository<br>\n        <span class=\"code\">pull</span>&nbsp;Fetch from and integrate with another repository or a local branch<br>\n        <span class=\"code\">push</span>&nbsp;Update remote refs along with associated objects<br>\n    ",
+    "git help": "\n        start a working area<br>\n        <span class=\"code\">init</span>&nbsp;Create an empty Git repository or reinitialize an existing one<br><br>\n\n        work on the current change<br>\n        <span class=\"code\">add</span>&nbsp;Add file contents to the index<br><br>\n\n        grow, mark and tweak your common history<br>\n        <span class=\"code\">checkout</span>&nbsp;Switch branches or restore working tree files<br>\n        <span class=\"code\">branch</span>&nbsp;List, create, or delete branches<br>\n        <span class=\"code\">commit</span>&nbsp;Record changes to the repository<br>\n        <span class=\"code\">merge</span>&nbsp;Join two or more development histories together<br><br>\n\n        collaborate<br>\n        <span class=\"code\">remote</span>&nbsp;Manage set of tracked repositories<br>\n        <span class=\"code\">fetch</span>&nbsp;Download objects and refs from another repository<br>\n        <span class=\"code\">pull</span>&nbsp;Fetch from and integrate with another repository or a local branch<br>\n        <span class=\"code\">push</span>&nbsp;Update remote refs along with associated objects<br>\n    ",
 };
 var app = function () {
     userInput = document.getElementById("userInput");
@@ -48,6 +48,7 @@ var app = function () {
     document.getElementById("dummyKeyboard").focus();
     tutor.showExerciseTitle();
     tutor.showProgressBar();
+    tutor.showStep();
     console.log("Application loaded");
 };
 var execute = function executeCommand(input) {

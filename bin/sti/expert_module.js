@@ -101,7 +101,7 @@ var Expert = (function () {
     }
     Expert.prototype.answerExercise = function (exercise) {
         var exerciseAnswer = EXERCISES_ANSWERS.find(function (it) { return it.exerciseIndex == exercise.index; });
-        var stepAnswer = exerciseAnswer.steps[exercise.currentStep];
+        var stepAnswer = "(" + exerciseAnswer.steps[exercise.currentStep] + ")$";
         var match = exercise.answer.match(stepAnswer);
         var isCorrect = match != null && match.length > 0;
         var response = isCorrect ? "Correto!" : exerciseAnswer.hints[exercise.currentStep];

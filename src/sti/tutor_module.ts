@@ -1,4 +1,4 @@
-const FIRST_EXERCISE_INDEX = 3;
+const FIRST_EXERCISE_INDEX = 4;
 
 class Tutor {
     currentExercise: Exercise;
@@ -37,6 +37,13 @@ class Tutor {
         });
         titleDOM.innerHTML = output;
     }
+    showStep(): void {
+        var currentStepDOM = document.getElementById("current-step");
+        var totalStepDOM = document.getElementById("total-step");
+
+        currentStepDOM.innerText = (this.currentExercise.currentStep + 1).toString();
+        totalStepDOM.innerText = "/" + this.currentExercise.totalSteps.toString();
+    }
     
     answerExercise(answer: string): string {
         var response: string;
@@ -47,12 +54,14 @@ class Tutor {
         if (answerResponse.isCorrect) {
             response = `<div class="terminal-line tutor-line correct-answer">${answerResponse.response}</div>`;
             
+
             user.resetCurrentStepAttempts();
             if (this.currentExercise.currentStep == this.currentExercise.totalSteps) {
                 user.addFinishedExercises(this.currentExercise);
 
                 this.getNextExercise();
             }
+            this.showStep();
         } else {
             if (this.shouldGiveHint()) {
                 response = `

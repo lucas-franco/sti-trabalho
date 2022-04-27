@@ -106,3 +106,40 @@ body {
 .retry-button-label {
     color: #ffffff !important;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.step-container {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 80px;
+    height: 80px;
+    border-width: 2;
+    border-style: solid;
+    border-color: #00d740c3;
+    /* background-color: #ffffff; */
+    border-radius: 64px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-text {
+    color: #5d656b;
+    font-weight: 500;
+    font-family: "Anonymous Pro", monospace;
+}
+
+.step-text-current {
+    /* color: #00d740c3; */
+    font-weight: 600;
+}
+
+.step-text-total {
+    color: #5d656b9f;
+}

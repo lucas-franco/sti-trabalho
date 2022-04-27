@@ -1,4 +1,4 @@
-var FIRST_EXERCISE_INDEX = 3;
+var FIRST_EXERCISE_INDEX = 4;
 var Tutor = (function () {
     function Tutor() {
         this.currentExercise = expert.getExercise(FIRST_EXERCISE_INDEX);
@@ -34,6 +34,12 @@ var Tutor = (function () {
         });
         titleDOM.innerHTML = output;
     };
+    Tutor.prototype.showStep = function () {
+        var currentStepDOM = document.getElementById("current-step");
+        var totalStepDOM = document.getElementById("total-step");
+        currentStepDOM.innerText = (this.currentExercise.currentStep + 1).toString();
+        totalStepDOM.innerText = "/" + this.currentExercise.totalSteps.toString();
+    };
     Tutor.prototype.answerExercise = function (answer) {
         var response;
         this.currentExercise.addAnswer(answer);
@@ -45,6 +51,7 @@ var Tutor = (function () {
                 user.addFinishedExercises(this.currentExercise);
                 this.getNextExercise();
             }
+            this.showStep();
         }
         else {
             if (this.shouldGiveHint()) {
