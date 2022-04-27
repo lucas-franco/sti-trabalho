@@ -22,8 +22,8 @@
         "build": "run-s build:*",
         "serve": "browser-sync start -s \"bin\" -f \"bin\"",
         "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" bin",
-        "build:scss": "node-sass --output-style compressed -r src -o bin",
-        "build:tsc": "tsc",
+
+
         "watch:tsc": "tsc -w",
         "watch:scss": "onchange \"src/**/*.scss\" -- run-s build:scss",
         "watch:assets": "onchange \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" -- run-s build:assets",
