@@ -11,7 +11,31 @@ const COMMANDS = {
     // "cd usr": "no users found",
 
     // "cd home": "home was aliased to .",
-    help: 'Supported commands: <span class="code">clear</span>, <span class="code">history</span>, <span class="code">ls</span><br>Tip: Use Up / Down arrow to go through recent commands',
+    help: 'Comandos disponíveis: <span class="code">git help</span>, <span class="code">clear</span>, <span class="code">history</span>, <span class="code">ls</span><br>Dica: Use a Seta para Cima/Baixo para percorrer comandos recentes.',
+    "git help": `
+        start a working area (see also: git help tutorial)<br>
+        <span class="code">init</span>&nbsp;Create an empty Git repository or reinitialize an existing one<br><br>
+
+        work on the current change (see also: git help everyday)<br>
+        <span class="code">add</span>&nbsp;Add file contents to the index<br><br>
+
+        grow, mark and tweak your common history<br>
+        <span class="code">checkout</span>&nbsp;Switch branches or restore working tree files<br>
+        <span class="code">branch</span>&nbsp;List, create, or delete branches<br>
+        <span class="code">commit</span>&nbsp;Record changes to the repository<br>
+        <span class="code">merge</span>&nbsp;Join two or more development histories together<br><br>
+
+        collaborate (see also: git help workflows)<br>
+        <span class="code">remote</span>&nbsp;Manage set of tracked repositories<br>
+        <span class="code">fetch</span>&nbsp;Download objects and refs from another repository<br>
+        <span class="code">pull</span>&nbsp;Fetch from and integrate with another repository or a local branch<br>
+        <span class="code">push</span>&nbsp;Update remote refs along with associated objects<br>
+    `,
+    // <span class="code">clone</span>&nbsp;Clone a repository into a new directory<br>
+    // <span class="code">status</span>&nbsp;Show the working tree status<br><br>
+    // <span class="code">rebase</span>&nbsp;Reapply commits on top of another base tip<br>
+    // <span class="code">reset</span>&nbsp;Reset current HEAD to the specified state<br><br>
+
 };
 
 const app = () => {
@@ -39,7 +63,7 @@ const execute = function executeCommand(input: string) {
         output = `<div class="terminal-line"><span class="success">➜</span> <span class="directory">~</span> ${input}</div>`;
         if (!COMMANDS.hasOwnProperty(input) && !input.startsWith("git")) {
             output += `<div class="terminal-line">command not found: ${input}</div>`;
-        } else if (input.startsWith("git")) {
+        } else if (input.startsWith("git") && !COMMANDS.hasOwnProperty(input)) {
             var answerResponse: string = tutor.answerExercise(input);
             output += answerResponse;
         } else {
@@ -52,7 +76,7 @@ const execute = function executeCommand(input: string) {
 };
 
 const key = (e) => {
-    // console.log("key", {e});
+    console.log("key", {e});
 
     const input = userInput.innerHTML;
     if (e.key === "Enter") {
@@ -83,8 +107,13 @@ function showHist() {
 }
 
 let iter = 0;
-const up = (e) => {
-    // console.log("up", {e});
+const up = async (e) => {
+    console.log("up", {e});
+
+    if (e.code == "Quote") {
+        console.log("up", {e});
+        userInput.innerHTML = userInput.innerHTML + "\"";
+    }
     if (e.key === "Escape") {
         tutor.finishSession();
     }
@@ -102,6 +131,12 @@ const up = (e) => {
             userInput.innerHTML = lastCommands[lastCommands.length - iter];
         }
     }
+        if ((e.metaKey || e.ctrlKey) && e.key === "v") {
+        const text = await navigator.clipboard.readText();
+        console.log("metaKey", { char: "⌘-" + e.keyCode, text});
+        userInput.innerHTML = userInput.innerHTML + text;
+    }
+
 };
 
 function clearScreen() {

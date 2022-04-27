@@ -1,4 +1,4 @@
-const FIRST_EXERCISE_INDEX = 1;
+const FIRST_EXERCISE_INDEX = 3;
 
 class Tutor {
     currentExercise: Exercise;
